@@ -15,10 +15,25 @@
  */
 
 #define CAMERA_PARAMETERS_EXTRA_C \
-    const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual"; \
-    const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "manual-cct";
+const char CameraParameters::KEY_QC_SUPPORTED_DENOISE[] = "denoise-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_FACE_DETECTION[] = "face-detection-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_HFR_SIZES[] = "hfr-size-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_REDEYE_REDUCTION[] = "redeye-reduction-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_TOUCH_AF_AEC[] = "touch-af-aec-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_VIDEO_HIGH_FRAME_RATE_MODES[] = "video-hfr-values"; \
+const char CameraParameters::KEY_QC_SUPPORTED_ZSL_MODES[] = "zsl-values"; \
+const char CameraParameters::KEY_QC_VIDEO_HIGH_FRAME_RATE[] = "video-hfr"; \
+const char CameraParameters::KEY_QC_ZSL[] = "zsl"; \
+\
 
 #define CAMERA_PARAMETERS_EXTRA_H \
-    static const char FOCUS_MODE_MANUAL_POSITION[]; \
-    static const char WHITE_BALANCE_MANUAL_CCT[];
-
+    static const char KEY_QC_SUPPORTED_DENOISE[]; \
+    static const char KEY_QC_SUPPORTED_FACE_DETECTION[]; \
+    static const char KEY_QC_SUPPORTED_HFR_SIZES[]; \
+    static const char KEY_QC_SUPPORTED_REDEYE_REDUCTION[]; \
+    static const char KEY_QC_SUPPORTED_TOUCH_AF_AEC[]; \
+    static const char KEY_QC_SUPPORTED_VIDEO_HIGH_FRAME_RATE_MODES[]; \
+    static const char KEY_QC_SUPPORTED_ZSL_MODES[]; \
+    static const char KEY_QC_VIDEO_HIGH_FRAME_RATE[]; \
+    static const char KEY_QC_ZSL[]; \
+    \

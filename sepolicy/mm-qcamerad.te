@@ -1,2 +1,10 @@
 #============= mm-qcamerad ==============
-allow mm-qcamerad system_file:file execmod;
+allow mm-qcamerad system_data_file:dir w_dir_perms;
+allow mm-qcamerad system_data_file:file open;
+
+allow mm-qcamerad system_server:unix_stream_socket rw_socket_perms;
+
+binder_call(mm-qcamerad, servicemanager)
+binder_call(mm-qcamerad, system_server)
+
+unix_socket_connect(mm-qcamerad, mpctl, mpdecision)
