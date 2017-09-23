@@ -140,7 +140,7 @@ TARGET_NO_RPC := true
 TARGET_USE_SDCLANG := true
 
 # CMHW
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/f9927000.i2c/i2c-5/5-005d/wakeup_gesture"
+TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw \
