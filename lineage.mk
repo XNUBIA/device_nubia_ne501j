@@ -30,9 +30,14 @@ PRODUCT_GMS_CLIENTID_BASE := android-zte
 
 PRODUCT_BRAND := Nubia
 TARGET_VENDOR := Nubia
-TARGET_VENDOR_PRODUCT_NAME := NE501J
+TARGET_VENDOR_PRODUCT_NAME := ZTE
 TARGET_VENDOR_DEVICE_NAME := NE501J
 PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=NE501J PRODUCT_NAME=NE501J
+
+PRODUCT_PROPERTY_OVERRIDES += \
+        ro.ota.romname=RR-NE501J \
+        ro.ota.manifest=https://raw.githubusercontent.com/XNUBIA/RR-ota/master/RR_ota.xml \
+        ro.ota.version=$(shell date +%Y%m%d)
 
 WITH_SU := true
 
