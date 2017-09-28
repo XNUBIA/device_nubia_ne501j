@@ -38,6 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.ota.romname=RR-NE501J \
         ro.ota.manifest=https://raw.githubusercontent.com/XNUBIA/RR-ota/master/RR_ota.xml \
         ro.ota.version=$(shell date +%Y%m%d)
+PRODUCT_PACKAGES += OTAUpdates
 
 WITH_SU := true
 
