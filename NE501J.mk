@@ -18,7 +18,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product-if-exists, vendor/NUBIA/NE501J/NE501J-vendor.mk)
 
 # Overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += \
+	$(LOCAL_PATH)/overlay \
+	$(LOCAL_PATH)/overlay-lineage
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -69,6 +71,8 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # Audio
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
     audiod \
     audio.a2dp.default \
     audio_policy.msm8226 \
@@ -81,6 +85,11 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessingdescriptors \
     tinymix
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    libbt-vendor
+
 # Audio configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
@@ -90,9 +99,12 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@1.0-impl \
     libxml2 \
     camera.msm8226 \
     libshim_camera \
+    libcamera_parameters_shim \
     Camera2
 
 # Connectivity Engine support
@@ -100,8 +112,16 @@ PRODUCT_PACKAGES += \
     libcnefeatureconfig \
     librmnetctl
 
+# Memtrack HIDL Interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl
+
 # Display
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.memtrack@1.0-impl \
     copybit.msm8226 \
     gralloc.msm8226 \
     hwcomposer.msm8226 \
@@ -139,12 +159,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat
 
-# Keystore
+# Keymaster
 PRODUCT_PACKAGES += \
-    keystore.msm8226
+    android.hardware.keymaster@3.0-impl
 
 # Lights
 PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
     lights.msm8226
 
 # Media
@@ -159,7 +180,7 @@ PRODUCT_COPY_FILES += \
 # WiFi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/vendor/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
     $(LOCAL_PATH)/wifi/wifi_info:system/etc/wifi/wifi_info
           
@@ -178,6 +199,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl \
     power.msm8226
 
 # Doze mode
@@ -194,6 +216,10 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     ueventd.qcom.rc 
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+
 # for nubia camera app
 PRODUCT_PACKAGES += \
     libshim_nubia
@@ -205,11 +231,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
+
 # Wifi
 PRODUCT_PACKAGES += \
-    hostapd.accept \
-    hostapd.deny \
-    hostapd \
+    android.hardware.wifi@1.0-service \
+    wificond \
     wpa_supplicant \
     wpa_supplicant.conf \
     wpa_supplicant_overlay.conf \
@@ -240,8 +277,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libion
 
+# Default OMX service to non-Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
+
 # GPS
 PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
     gps.msm8226
 
 PRODUCT_COPY_FILES += \
@@ -267,7 +309,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
-    $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
+
+# Seccomp
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/configs/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+
 
 # KeyLayout
 PRODUCT_COPY_FILES += \

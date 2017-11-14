@@ -195,3 +195,7 @@ persist.sys.wfd.1080p_support=true
 persist.sys.modelnumber=NE501J
 
 dalvik.vm.dex2oat-swap=false
+
+# Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.hwui.use_buffer_age=false

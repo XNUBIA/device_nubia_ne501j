@@ -55,6 +55,7 @@ TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 # Kernel
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
@@ -89,12 +90,13 @@ BLUETOOTH_HCI_USE_MCT := true
 QCOM_BT_USE_SMD_TTY := true
 
 # Camera
-TARGET_SPECIFIC_HEADER_PATH := device/NUBIA/NE501J/include
+#TARGET_SPECIFIC_HEADER_PATH := device/NUBIA/NE501J/include
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 TARGET_USE_COMPAT_GRALLOC_ALIGN := true
+TARGET_USES_NON_TREBLE_CAMERA := true
 
 # Enables Adreno RS driver
 USE_OPENGL_RENDERER := true
@@ -107,6 +109,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE:= false
 VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
+SF_START_GRAPHICS_ALLOCATOR_SERVICE := true
 TARGET_USES_QCOM_BSP := true
 BOARD_USES_OPENSSL_SYMBOLS := true
 #TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
@@ -212,8 +215,8 @@ TARGET_USERIMAGES_USE_F2FS := true
 #SKIP_BOOT_JARS_CHECK := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
 
 # Radio
 ADD_RADIO_FILES := true
