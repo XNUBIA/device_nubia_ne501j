@@ -44,8 +44,8 @@ LOCAL_COPY_HEADERS:= \
    loc_log.h \
    loc_cfg.h \
    log_util.h \
-   linked_list.cpp \
-   msg_q.cpp \
+   linked_list.h \
+   msg_q.h \
    MsgTask.h \
    LocHeap.h \
    LocThread.h \
@@ -59,6 +59,7 @@ LOCAL_COPY_HEADERS:= \
    loc_misc_utils.h
 
 LOCAL_MODULE := libgps.utils
+LOCAL_CLANG := false
 
 LOCAL_MODULE_TAGS := optional
 
