@@ -40,5 +40,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
         ro.ota.version=$(shell date +%Y%m%d)
 PRODUCT_PACKAGES += OTAUpdates
 
-WITH_SU := true
+#WITH_SU := true
 
