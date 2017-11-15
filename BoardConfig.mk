@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # inherit from the proprietary version
--include vendor/NUBIA/NE501J/BoardConfigVendor.mk
+-include vendor/NUBIA/X9180/BoardConfigVendor.mk
 
 LOCAL_PATH := device/NUBIA/NE501J
 
