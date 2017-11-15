@@ -126,14 +126,14 @@ static char *camera_fixup_getparams(int id, const char *settings)
     params.dump();
 #endif
 
-    if (params.get(android::KEY_RECORDING_HINT)) {
-	videoMode = (!strcmp(params.get(android::KEY_RECORDING_HINT), "true"));
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+	videoMode = (!strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true"));
     }
 
     if(ID_CAMERA_FRONT == id) {
-	params.set(android::KEY_PREVIEW_FPS_RANGE,
+	params.set(android::CameraParameters::KEY_PREVIEW_FPS_RANGE,
 		    previewFpsRange);
-	params.set(android::KEY_SUPPORTED_PREVIEW_FPS_RANGE,
+	params.set(android::CameraParameters::KEY_SUPPORTED_PREVIEW_FPS_RANGE,
 		    previewFpsRangeValues);
     } else {
 	params.set("min-focus-pos-index", "0");
@@ -163,8 +163,8 @@ static char *camera_fixup_setparams(int id, const char *settings, struct camera_
     params.dump();
 #endif
 
-    if (params.get(android::KEY_RECORDING_HINT)) {
-        videoMode = !strcmp(params.get(android::KEY_RECORDING_HINT), "true");
+    if (params.get(android::CameraParameters::KEY_RECORDING_HINT)) {
+        videoMode = !strcmp(params.get(android::CameraParameters::KEY_RECORDING_HINT), "true");
     }
 
     if (params.get("manual-focus-position") && params.get("focus-mode") && !strcmp(params.get("focus-mode"), "manual")) {
@@ -192,7 +192,7 @@ static char *camera_fixup_setparams(int id, const char *settings, struct camera_
         if(camera_preview_enabled(device)) {
             if(videoMode) {
                 ALOGV("%s: trying to fix video recording...", __FUNCTION__);
-                params.set(android::KEY_RECORDING_HINT, "false");
+                params.set(android::CameraParameters::KEY_RECORDING_HINT, "false");
 
                 android::String8 strParams = params.flatten();
                 if (fixed_set_params[id])
@@ -201,7 +201,7 @@ static char *camera_fixup_setparams(int id, const char *settings, struct camera_
                 char *ret = fixed_set_params[id];
                 VENDOR_CALL(device, set_parameters, fixed_set_params[id]);
 
-                params.set(android::KEY_RECORDING_HINT, "true");
+                params.set(android::CameraParameters::KEY_RECORDING_HINT, "true");
 
                 needsVideoFix = false;
             } else {
