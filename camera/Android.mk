@@ -18,8 +18,8 @@ LOCAL_STATIC_LIBRARIES := \
      libarect
 
 LOCAL_C_INCLUDES += \
-    system/media/camera/include
-    framework/native/include \
+    system/media/camera/include \
+    framework/native/include 
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE := camera.qcom
