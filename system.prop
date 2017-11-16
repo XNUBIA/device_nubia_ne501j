@@ -83,7 +83,7 @@ ro.data.large_tcp_window_size=true
 persist.timed.enable=true
 
 # Storage
-ro.sys.sdcardfs=true
+ro.sys.sdcardfs=false
 
 # Wifi
 wifi.interface=wlan0
