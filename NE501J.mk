@@ -75,6 +75,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.broadcastradio@1.0-impl \
     android.hardware.soundtrigger@2.0-impl \
+    audiod \
     audio.a2dp.default \
     audio_policy.msm8226 \
     audio.primary.msm8226 \
@@ -310,8 +311,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
 
-PRODUCT_PACKAGES += \ 
-    android.hardware.thermal@1.0-impl
+# Seccomp
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/configs/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+
 
 # KeyLayout
 PRODUCT_COPY_FILES += \
