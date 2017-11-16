@@ -308,9 +308,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
     $(LOCAL_PATH)/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
-    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf 
+    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
 
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \ 
     android.hardware.thermal@1.0-impl
 
 # KeyLayout
