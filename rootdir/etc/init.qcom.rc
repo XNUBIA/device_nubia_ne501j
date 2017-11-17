@@ -25,7 +25,7 @@ on early-init
 on init
 
     # LIB SHIM
-    export LD_SHIM_LIBS "/system/vendor/lib/libmmqjpeg_codec.so|libboringssl-compat.so:/system/lib/libFNVfbEngineHAL.so|/system/lib/libshim_camera.so:/system/lib/libnubiajpeg.so|/system/lib/libshim_nubia.so:/system/vendor/lib/libwvm.so|/system/lib/libshim_wvm.so"
+    export LD_SHIM_LIBS "/system/vendor/lib/libmmqjpeg_codec.so|libboringssl-compat.so:/system/lib/libFNVfbEngineHAL.so|/system/lib/libshim_camera.so:/system/lib/libnubiajpeg.so|/system/lib/libshim_nubia.so:/system/vendor/lib/libwvm.so|/system/lib/libshim_wvm.so:/system/vendor/lib/libqc-opt.so|libshim_qcopt.so"
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -458,15 +458,12 @@ on post-fs-data
 
 # Services start here
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system wakelock
 
-on property:ro.boot.emmc=true
-    start rmt_storage
-
-service rfs_access /system/bin/rfs_access
+service rfs_access /vendor/bin/rfs_access
     class core
     user system
     group system net_raw
@@ -477,7 +474,7 @@ service qmuxd /system/bin/qmuxd
     user radio
     group radio audio bluetooth wakelock gps diag
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     user root
     group root wifi wakelock radio inet system
@@ -496,7 +493,7 @@ on property:ro.data.large_tcp_window_size=true
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
@@ -525,7 +522,7 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     disabled
     oneshot
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
@@ -545,12 +542,12 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class main
     user camera
     group camera system inet input graphics
 
-service thermal-engine /system/vendor/bin/thermal-engine --config /system/etc/thermal-engine-8226.conf
+service thermal-engine /vendor/bin/thermal-engine --config /system/etc/thermal-engine-8226.conf
    class main
    user root
    group root
@@ -558,7 +555,7 @@ service thermal-engine /system/vendor/bin/thermal-engine --config /system/etc/th
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /vendor/bin/time_daemon
     class main
     user root
     group root
@@ -600,8 +597,6 @@ on property:bluetooth.hciattach=true
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
-
-service adsprpcd /system/bin/adsprpcd
    class main
    user media
    group media
@@ -650,18 +645,12 @@ service ssr_diag /system/bin/ssr_diag
     user system
     group system
 
-service ril-daemon /system/bin/rild
+service ril-daemon1 /vendor/bin/hw/rild -c 2
     class main
     user radio
-    group radio cache inet misc audio log readproc wakelock qcom_diag
+    group radio cache inet misc audio log readproc wakelock
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
-
-service ril-daemon1 /system/vendor/bin/hw/rild -c 2
-    class main
-    socket rild2 stream 660 root radio
-    socket rild-debug2 stream 660 radio system
-    user root
-    group radio cache inet misc audio log readproc wakelock qcom_diag
+    disabled
 
 service tp_node /system/bin/sh /system/bin/tp_node.sh
     class main

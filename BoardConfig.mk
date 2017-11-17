@@ -20,10 +20,6 @@ LOCAL_PATH := device/NUBIA/NE501J
 
 PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl, $(PRODUCT_COPY_FILES))
 
-# RIL
-TARGET_RIL_VARIANT := caf
-PROTOBUF_SUPPORTED := true
-
 # Assert
 TARGET_OTA_ASSERT_DEVICE := NE501J,X9180,V9180,U9180,ne501j,x9180,v9180,u9180
 
@@ -54,7 +50,8 @@ TARGET_CPU_VARIANT := krait
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x37 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1
+androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_BASE := 0x00000000
@@ -71,9 +68,9 @@ TARGET_KERNEL_CONFIG := msm8926-ne501j_defconfig
 TARGET_POWERHAL_VARIANT := qcom
 
 # Audio
-BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
+BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_GENERIC_AUDIO := true
 TARGET_USES_QCOM_MM_AUDIO := true
 
@@ -95,20 +92,11 @@ TARGET_USE_VENDOR_CAMERA_EXT := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Enables Adreno RS driver
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 USE_OPENGL_RENDERER := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
-TARGET_USES_NEW_ION_API :=true
-TARGET_USES_OVERLAY := true
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-HAVE_ADRENO_SOURCE:= false
-VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
-SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
-SF_START_GRAPHICS_ALLOCATOR_SERVICE := true
-TARGET_USES_QCOM_BSP := true
-BOARD_USES_OPENSSL_SYMBOLS := true
-#TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -137,13 +125,9 @@ TARGET_NO_RPC := true
 # Use Snapdragon LLVM, if available
 TARGET_USE_SDCLANG := true
 
-# CMHW
-TARGET_TAP_TO_WAKE_NODE := "/data/tp/easy_wakeup_gesture"
-BOARD_USES_CYANOGEN_HARDWARE := true
+# Lineage hardware
 BOARD_HARDWARE_CLASS += \
-    hardware/cyanogen/cmhw \
-    device/NUBIA/NE501J/cmhw
-
+    $(VENDOR_PATH)/lineagehw
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 
@@ -210,8 +194,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 #SKIP_BOOT_JARS_CHECK := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
 
 # Radio
 ADD_RADIO_FILES := true

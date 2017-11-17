@@ -52,8 +52,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:system/etc/permissions/android.hardware.sensor.stepdetector.xml \
     frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
     frameworks/native/data/etc/android.software.print.xml:system/etc/permissions/android.software.print.xml \
-    frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml \
-    external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
+    frameworks/native/data/etc/android.hardware.ethernet.xml:system/etc/permissions/android.hardware.ethernet.xml 
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
@@ -108,6 +107,7 @@ PRODUCT_PACKAGES += \
     libxml2 \
     camera.msm8226 \
     libshim_camera \
+    libshim_qcopt \
     Camera2
 
 # Connectivity Engine support
@@ -255,12 +255,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant_overlay.conf \
     p2p_supplicant_overlay.conf 
 
-# ANT+
-PRODUCT_PACKAGES += \
-    libantradio \
-    AntHalService \
-    com.dsi.ant.antradio_library \
-    antradio_app
 
 PRODUCT_PACKAGES += \
     giflib
@@ -311,13 +305,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
     $(LOCAL_PATH)/etc/permissions/com.qualcomm.location.xml:system/etc/permissions/com.qualcomm.location.xml \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
-    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
-
-# Seccomp
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/configs/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
-
+    $(LOCAL_PATH)/etc/thermal-engine-8226.conf:system/etc/thermal-engine-8226.conf \
+    $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf 
 
 # KeyLayout
 PRODUCT_COPY_FILES += \
