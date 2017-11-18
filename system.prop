@@ -61,9 +61,6 @@ media.stagefright.enable-qcp=true
 media.stagefright.enable-fma2dp=true
 media.stagefright.enable-scan=true
 
-# enable video recording
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
 
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
@@ -195,3 +192,7 @@ persist.sys.wfd.1080p_support=true
 persist.sys.modelnumber=NE501J
 
 dalvik.vm.dex2oat-swap=false
+
+# Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.hwui.use_buffer_age=false
