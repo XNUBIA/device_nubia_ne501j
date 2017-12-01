@@ -212,9 +212,6 @@ TARGET_USERIMAGES_USE_F2FS := true
 #SKIP_BOOT_JARS_CHECK := true
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
+#include device/qcom/sepolicy/sepolicy.mk
+#BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
 
-# Radio
-ADD_RADIO_FILES := true
-TARGET_RELEASETOOLS_EXTENSIONS := $(LOCAL_PATH)
