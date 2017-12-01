@@ -207,6 +207,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    wificond \
     hostapd.accept \
     hostapd.deny \
     hostapd \
