@@ -40,6 +40,7 @@ persist.hwc.mdpcomp.enable=true
 debug.mdpcomp.4k2kSplit=1
 debug.mdpcomp.logs=0
 ro.sf.lcd_density=300
+debug.hwui.use_buffer_age=false
 persist.sys.strictmode.disable=true
 dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
@@ -155,11 +156,11 @@ persist.sys.ssr.restart_level=3
 persist.sys.ap.restart_level=0
 
 #wifi and bt name
-persist.sys.bluetooth.name=nubia Z7 mini
-persist.sys.wifi.p2pname=nubia Z7 mini
-persist.sys.wifi.softapname=nubia Z7 mini
+persist.sys.bluetooth.name=nubia
+persist.sys.wifi.p2pname=nubia
+persist.sys.wifi.softapname=nubia
 #device name
-ro.config.devicename=nubia Z7 mini
+ro.config.devicename=nubia
 
 #set primary card enabled
 persist.radio.primarycard=false
