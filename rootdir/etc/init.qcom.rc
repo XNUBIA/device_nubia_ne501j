@@ -241,8 +241,8 @@ on post-fs-data
     mkdir /data/shared 0755
     chown system system /data/shared
 
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
+    # Create /data/vendro/time folder for time-services
+    mkdir /data/vendor/time/ 0700 system system
 
     mkdir /data/audio/ 0770 media audio
 
