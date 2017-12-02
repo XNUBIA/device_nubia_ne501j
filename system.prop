@@ -64,6 +64,7 @@ media.stagefright.enable-scan=true
 # enable video recording
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
+persist.media.treble_omx=false
 
 mmp.enable.3g2=true
 mm.enable.smoothstreaming=true
