@@ -69,6 +69,10 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # Audio
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl \
     audiod \
     audio.a2dp.default \
     audio_policy.msm8226 \
@@ -90,10 +94,16 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl.legacy \
+    camera.device@1.0-impl.legacy \
     libxml2 \
     camera.msm8226 \
     libshim_camera \
     Camera2
+
+# Configstore
+PRODUCT_PACKAGES += \
+    android.hardware.configstore@1.0-impl
 
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
@@ -107,6 +117,17 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8226 \
     memtrack.msm8226 \
     liboverlay
+
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.memtrack@1.0-impl
+
+# DRM
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
 
 # Ebtables
 PRODUCT_PACKAGES += \
@@ -141,10 +162,12 @@ PRODUCT_PACKAGES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl \
     keystore.msm8226
 
 # Lights
 PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
     lights.msm8226
 
 # Media
@@ -178,7 +201,12 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl \
     power.msm8226
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 # Doze mode
 PRODUCT_PACKAGES += \
@@ -207,6 +235,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     wificond \
     hostapd.accept \
     hostapd.deny \
@@ -262,6 +291,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/data/network.conf:system/etc/bluetooth/network.conf 
 
 PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
     libbt-vendor 
 
 # etc
@@ -273,6 +303,21 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
 
+# Sensors
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl
+# Thermal
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl
+
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
+ 
 # KeyLayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/usr/idc/cyttsp4_mt.idc:system/usr/idc/cyttsp4_mt.idc \
