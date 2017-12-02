@@ -243,9 +243,6 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     wificond \
     wifilogd \
-    hostapd.accept \
-    hostapd.deny \
-    hostapd \
     wpa_supplicant \
     wpa_supplicant.conf \
     wpa_supplicant_overlay.conf \
