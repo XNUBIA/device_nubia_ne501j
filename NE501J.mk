@@ -165,6 +165,10 @@ PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     keystore.msm8226
 
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
+
 # Lights
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-impl \
@@ -272,6 +276,7 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
     gps.msm8226
 
 PRODUCT_COPY_FILES += \
