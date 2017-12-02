@@ -14,11 +14,11 @@ LOCAL_CFLAGS += -DPDK_FEATURE_SET
 endif
 
 LOCAL_SHARED_LIBRARIES := \
+    liblog \
     libutils \
     libcutils \
     libgps.utils \
-    libdl \
-    liblog
+    libdl
 
 LOCAL_SRC_FILES += \
     LocApiBase.cpp \
