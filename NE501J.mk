@@ -261,6 +261,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
     $(LOCAL_PATH)/bluetooth/data/network.conf:system/etc/bluetooth/network.conf 
 
+PRODUCT_PACKAGES += \
+    libbt-vendor 
+
 # etc
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
