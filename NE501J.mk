@@ -240,6 +240,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     wificond \
+    wifilogd \
     hostapd.accept \
     hostapd.deny \
     hostapd \
