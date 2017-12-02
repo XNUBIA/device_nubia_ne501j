@@ -15,7 +15,7 @@
 #
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-$(call inherit-product-if-exists, vendor/NUBIA/NE501J/NE501J-vendor.mk)
+$(call inherit-product-if-exists, vendor/NUBIA/X9180/X9180-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -161,10 +161,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libboringssl-compat
 
-# Keystore
+# Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    keystore.msm8226
+    android.hardware.keymaster@3.0-impl
 
 # HIDL
 PRODUCT_COPY_FILES += \
