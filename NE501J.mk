@@ -310,6 +310,12 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
+
+# Seccomp
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/etc/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/etc/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+
 # Thermal
 PRODUCT_PACKAGES += \
     android.hardware.thermal@1.0-impl
