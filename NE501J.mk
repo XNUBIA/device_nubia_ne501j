@@ -68,29 +68,27 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 #$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
 # Audio
-# Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio.effect@2.0-impl \
-    android.hardware.broadcastradio@1.0-impl \
-    android.hardware.soundtrigger@2.0-impl \
+    audiod \
     audio.a2dp.default \
-    audio_amplifier.msm8226 \
     audio_policy.msm8226 \
     audio.primary.msm8226 \
     audio.r_submix.default \
-    audio.usb.default \
-    libaudio-resampler \
+    audio.usb.default 
+
+PRODUCT_PACKAGES += \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    tinymix
+    libqcomvoiceprocessingdescriptors 
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/vendor/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/vendor/audio_policy.conf \
+    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/venetc/audio_policy.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/vendor/etc/mixer_paths.xml
 
 # Camera
@@ -283,6 +281,14 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
 
 # Bluetooth configuration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf \
+    $(LOCAL_PATH)/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
+    $(LOCAL_PATH)/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf \
+    $(LOCAL_PATH)/bluetooth/data/input.conf:system/etc/bluetooth/input.conf \
+    $(LOCAL_PATH)/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
+    $(LOCAL_PATH)/bluetooth/data/network.conf:system/etc/bluetooth/network.conf 
+
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     libbt-vendor 
@@ -301,9 +307,9 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
 # Seccomp
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/etc/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/etc/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+# PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/etc/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+#    $(LOCAL_PATH)/etc/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
 
 # Thermal
 PRODUCT_PACKAGES += \
