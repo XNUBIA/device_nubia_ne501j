@@ -483,7 +483,7 @@ service netmgrd /vendor/bin/netmgrd
     group root wifi wakelock radio inet system
 
 # QCOM sensor
-service sensors /system/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class main
     user root
     group root wakelock
@@ -556,13 +556,23 @@ service mpdecision /system/bin/mpdecision --avg_comp
    user root
    group root readproc
 
-service thermal-engine /system/vendor/bin/thermal-engine --config /system/etc/thermal-engine-8974.conf
+service thermal-engine /system/vendor/bin/thermal-engine 
    class main
    user root
    group root
    socket thermal-send-client stream 0666 system system
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
+
+service thermal-engine-8226 /system/vendor/bin/thermal-engine --config /system/etc/thermal-engine-8226.conf
+   class main
+   user root
+   socket thermal-send-client stream 0666 system system
+   socket thermal-recv-client stream 0660 system system
+   socket thermal-recv-passive-client stream 0666 system system
+   group root
+   disabled
+
 
 service time_daemon /vendor/bin/time_daemon
     class main
@@ -628,6 +638,21 @@ on property:init.svc.surfaceflinger=stopped
 
 on property:init.svc.surfaceflinger=running
     start ppd
+
+ on property:sys.perf.profile=2
+    start changepowermode
+    stop thermal-engine
+    start thermal-8226
+  
+  on property:sys.perf.profile=1
+    start changepowermode
+    stop thermal-8226
+    start thermal-engine
+  
+  on property:sys.perf.profile=0
+    start changepowermode
+    stop thermal-8226
+    start thermal-engine
 
 # diag logging
 service diag_mdlog_start /system/bin/diag_mdlog
