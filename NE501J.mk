@@ -69,26 +69,27 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl \
-    audiod \
-    audio.a2dp.default \
-    audio_policy.msm8226 \
     audio.primary.msm8226 \
+    audio.a2dp.default \
+    audio.usb.default \
     audio.r_submix.default \
-    audio.usb.default 
 
 PRODUCT_PACKAGES += \
+    libaudio-resampler \
     libqcompostprocbundle \
     libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libqcomvoiceprocessingdescriptors 
+    libqcomvoiceprocessing
 
-# Audio configuration
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
-    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/venetc/audio_policy.conf \
+    $(LOCAL_PATH)/audio/audio_platform_info.xml:system/vendor/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/vendor/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/vendor/etc/mixer_paths.xml
 
 # Camera
@@ -307,9 +308,9 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-impl
 
 # Seccomp
-# PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/etc/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
-#    $(LOCAL_PATH)/etc/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/etc/mediacodec.policy:system/vendor/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/etc/mediaextractor.policy:system/vendor/etc/seccomp_policy/mediaextractor.policy
 
 # Thermal
 PRODUCT_PACKAGES += \
