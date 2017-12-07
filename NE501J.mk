@@ -305,7 +305,12 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl
+    $(LOCAL_PATH)/configs/sensors/_hals.conf:system/vendor/etc/sensors/_hals.conf
+
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    libshim_sensors \
+    sensors.nubia
 
 # Seccomp
 PRODUCT_COPY_FILES += \
