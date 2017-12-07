@@ -94,12 +94,13 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl.legacy \
-    camera.device@1.0-impl.legacy \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@1.0-impl \
     libxml2 \
-    camera.msm8226 \
+    camera.nubia \
     libshim_camera \
-    Camera2
+    libshim_cameraclient \
+    Snap
 
 # Configstore
 PRODUCT_PACKAGES += \
@@ -302,15 +303,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/etc/sensor_def_qcomdev.conf:system/etc/sensor_def_qcomdev.conf \
     $(LOCAL_PATH)/etc/xtwifi.conf:system/etc/xtwifi.conf \
     $(LOCAL_PATH)/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
-
-# Sensors
-PRODUCT_PACKAGES += \
-    $(LOCAL_PATH)/configs/sensors/_hals.conf:system/vendor/etc/sensors/_hals.conf
-
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    libshim_sensors \
-    sensors.nubia
 
 # Seccomp
 PRODUCT_COPY_FILES += \
