@@ -94,13 +94,10 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl \
-    camera.device@1.0-impl \
+    android.hardware.camera.provider@2.4-impl-legacy \
     libxml2 \
-    camera.nubia \
-    libshim_camera \
-    libshim_cameraclient \
-    Snap
+    libshims_camera \
+    Camera2
 
 # Configstore
 PRODUCT_PACKAGES += \
@@ -226,11 +223,11 @@ PRODUCT_PACKAGES += \
     ueventd.qcom.rc 
 
 # for nubia camera app
-PRODUCT_PACKAGES += \
-    libshim_nubia
+#PRODUCT_PACKAGES += \
+#    libshim_nubia
 
-PRODUCT_PACKAGES += \
-    libshim_wvm
+#PRODUCT_PACKAGES += \
+#    libshim_wvm
 
 # USB
 PRODUCT_PACKAGES += \
@@ -272,15 +269,7 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl \
-    gps.msm8226
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
-    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
-    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
+    android.hardware.gnss@1.0-impl 
 
 # Bluetooth configuration
 PRODUCT_COPY_FILES += \

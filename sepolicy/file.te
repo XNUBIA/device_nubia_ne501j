@@ -1,0 +1,5 @@
+# Cutback socket (RILD)
+type cutback_data_file, file_type, data_file_type;
+
+# Sensors
+type sysfs_devices_sensors, file_type, sysfs_type;

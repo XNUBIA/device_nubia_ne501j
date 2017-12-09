@@ -21,7 +21,7 @@ LOCAL_PATH := device/NUBIA/NE501J
 PRODUCT_COPY_FILES := $(filter-out frameworks/base/data/keyboards/Generic.kl:system/usr/keylayout/Generic.kl, $(PRODUCT_COPY_FILES))
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := NE501J,X9180,V9180,U9180,ne501j,x9180,v9180,u9180
+TARGET_OTA_ASSERT_DEVICE := NE501J,X9180,V9180,U9180,ne501j,x9180,v9180,u9180,.,
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
@@ -60,7 +60,7 @@ TARGET_KERNEL_SOURCE := kernel/NUBIA/X9180
 TARGET_KERNEL_ARCH := arm
 BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 TARGET_KERNEL_CONFIG := msm8926-ne501j_defconfig
-BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 
 # Audio
 # Audio
@@ -84,10 +84,9 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_SMD_TTY := true
 
 # Camera
-TARGET_USE_COMPAT_GRALLOC_ALIGN := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+TARGET_PROVIDES_CAMERA_HAL := true
+TARGET_USES_NON_TREBLE_CAMERA := true
 
 # Enables Adreno RS driver
 USE_OPENGL_RENDERER := true
@@ -195,12 +194,18 @@ endif
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
-# dex-preoptimization to speed up first boot sequence
-#WITH_DEXPREOPT := false
-
-#SKIP_BOOT_JARS_CHECK := true
+# Basic dexpreopt
+ifeq ($(HOST_OS),linux)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
+    ifeq ($(WITH_DEXPREOPT),)
+      WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_ONLY := true
+    endif
+  endif
+endif
 
 # SELinux
-#include device/qcom/sepolicy/sepolicy.mk
+-include device/qcom/sepolicy/sepolicy.mk
+-include device/qcom/sepolicy/legacy-sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/NUBIA/NE501J/sepolicy
 

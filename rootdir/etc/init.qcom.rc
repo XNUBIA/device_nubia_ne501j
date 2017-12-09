@@ -17,15 +17,16 @@
 import /init.nubia.usb.rc
 import /init.recovery.qcom.rc
 
+# Enable Alucard Hotplug
+    write /sys/kernel/alucard_hotplug/hotplug_enable 1
+
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
-
-    # LIB SHIM
-    export LD_SHIM_LIBS "/system/vendor/lib/libmmqjpeg_codec.so|libboringssl-compat.so:/system/lib/libFNVfbEngineHAL.so|/system/lib/libshim_camera.so:/system/lib/libnubiajpeg.so|/system/lib/libshim_nubia.so:/system/vendor/lib/libwvm.so|/system/lib/libshim_wvm.so:/system/lib/libcamera_client.so|libshim_cameraclient.so"
+    export LD_SHIM_LIBS /system/vendor/lib/libmmqjpeg_codec.so|libboringssl-compat.so:/system/lib/libFNVfbEngineHAL.so|/system/lib/libshim_camera.so:/system/vendor/bin/thermal-engine|libshims_thermal.so:/system/lib/hw/camera.vendor.msm8226.so|libshims_camera.so
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -517,7 +518,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service loc_launcher /system/bin/loc_launcher
+service loc_launcher /vendor/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class main
     group gps qcom_oncrpc inet net_raw diag qcom_diag net_admin wifi
@@ -546,17 +547,12 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class main
     user camera
     group camera system inet input graphics
 
-service mpdecision /system/bin/mpdecision --avg_comp
-   class main
-   user root
-   group root readproc
-
-service thermal-engine /system/vendor/bin/thermal-engine 
+service thermal-engine /vendor/bin/thermal-engine 
    class main
    user root
    group root
@@ -564,7 +560,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
 
-service thermal-engine-8226 /system/vendor/bin/thermal-engine --config /system/etc/thermal-engine-8226.conf
+service thermal-engine-8226 /vendor/bin/thermal-engine --config /system/etc/thermal-engine-8226.conf
    class main
    user root
    socket thermal-send-client stream 0666 system system

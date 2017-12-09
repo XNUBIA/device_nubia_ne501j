@@ -200,7 +200,7 @@ private:
     // for convenience, we don't do strlen each time.
     unsigned int mAPNLen;
     // bear
-    AGpsBearerType mBearer;
+    ApnIpType mBearer;
     // ipv4 address for routing
     bool mEnforceSingleSubscriber;
 
@@ -212,8 +212,8 @@ public:
     // self explanatory methods below
     void setAPN(const char* apn, unsigned int len);
     inline const char* getAPN() const { return (const char*)mAPN; }
-    inline void setBearer(AGpsBearerType bearer) { mBearer = bearer; }
-    inline AGpsBearerType getBearer() const { return mBearer; }
+    inline void setBearer(ApnIpType bearer) { mBearer = bearer; }
+    inline ApnIpType getBearer() const { return mBearer; }
     inline AGpsExtType getType() const { return (AGpsExtType)mType; }
 
     // someone, a ATL client or BIT, is asking for NIF
@@ -276,7 +276,6 @@ struct Subscriber {
     inline virtual ~Subscriber() {}
 
     virtual void setIPAddresses(uint32_t &v4, char* v6) = 0;
-    virtual void setIPAddresses(struct sockaddr_storage& addr) = 0;
     inline virtual void setWifiInfo(char* ssid, char* password)
     { ssid[0] = 0; password[0] = 0; }
 
@@ -317,9 +316,6 @@ struct BITSubscriber : public Subscriber {
     inline virtual void setIPAddresses(uint32_t &v4, char* v6)
     { v4 = ID; memcpy(v6, mIPv6Addr, sizeof(mIPv6Addr)); }
 
-    inline virtual void setIPAddresses(struct sockaddr_storage& addr)
-    { addr.ss_family = AF_INET6;/*todo: convert mIPv6Addr into addr */ }
-
     virtual Subscriber* clone()
     {
         return new BITSubscriber(mStateMachine, ID, mIPv6Addr);
@@ -343,9 +339,6 @@ struct ATLSubscriber : public Subscriber {
 
     inline virtual void setIPAddresses(uint32_t &v4, char* v6)
     { v4 = INADDR_NONE; v6[0] = 0; }
-
-    inline virtual void setIPAddresses(struct sockaddr_storage& addr)
-    { addr.ss_family = AF_INET6; }
 
     inline virtual Subscriber* clone()
     {
@@ -378,9 +371,6 @@ struct WIFISubscriber : public Subscriber {
     virtual bool notifyRsrcStatus(Notification &notification);
 
     inline virtual void setIPAddresses(uint32_t &v4, char* v6) {}
-
-    inline virtual void setIPAddresses(struct sockaddr_storage& addr)
-    { addr.ss_family = AF_INET6; }
 
     inline virtual void setWifiInfo(char* ssid, char* password)
     {
@@ -415,8 +405,6 @@ struct DSSubscriber : public Subscriber {
         mIsInactive = false;
     }
     inline virtual void setIPAddresses(uint32_t &v4, char* v6) {}
-    inline virtual void setIPAddresses(struct sockaddr_storage& addr)
-    { addr.ss_family = AF_INET6; }
     virtual Subscriber* clone()
     {return new DSSubscriber(mStateMachine, ID);}
     virtual bool notifyRsrcStatus(Notification &notification);

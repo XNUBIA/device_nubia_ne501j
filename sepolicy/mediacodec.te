@@ -1,5 +1,0 @@
-allow mediacodec sysfs:file getattr;
-allow mediacodec sysfs:file open;
-allow mediacodec sysfs:file read;
-allow mediacodec system_server:fifo_file append;
-allow mediacodec system_server:fifo_file write;
